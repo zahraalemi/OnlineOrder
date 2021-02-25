@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "onlineresturan": {
+      "hosting": {
+        "minprojekt": [
+          "onlineresturan"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<main class="pl-3 mt-5 d-flex justify-content-between text-white ">
+        <div class="col-6 pr-5">
+            <h1>Kontakt Oss</h1>
+            <form class="contact-box pt-4">
+                 <div class="mb-3">
+                    <input 
+                        type="email"
+                        required 
+                        ngModel 
+                        name="mailAddress" 
+                        #mailAddress="ngModel" 
+                        class="form-control" 
+                        (input)="check(mailAddress, comment)"
+                        placeholder="Email address" 
+                        >
+                    <div class="alert alert-danger" *ngIf="mailAddress.touched && !mailAddress.valid">Email is required</div>
+                </div>
+                
+                <div class="form-floating">
+                    <textarea 
+                        required 
+                        ngModel 
+                        name="comment" 
+                        #comment="ngModel" 
+                        (input)="check(mailAddress , comment)" 
+                        minlength="10" 
+                        maxlength="260" 
+                        class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <div class="alert alert-danger" *ngIf="comment.touched && !comment.valid">
+                        <div *ngIf="comment.errors.required">Comment is required</div>
+                        <div *ngIf="comment.errors.minlength">Comment should be minimum {{comment.errors.minlength.requiredLength}} characters</div>
+                    </div>
+                  </div>
+                
+
+                <button type="submit" class="btn btn-primary mt-4" [disabled]="isActive" (click)="onclick(mailAddress)" >Submit</button>
+            </form>
+
+            <div class="p-5">
+                <h5>{{textSuccess}}</h5>
+            </div>
+        </div>
+        
+        <div class="col-6 map-box pl-4">
+            <iframe class="map shadow"  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9372.56017758319!2d14.807008894716176!3d56.87358912121231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4657233e2a335579%3A0x400fef341e48fe0!2zVsOkeGrDtg!5e0!3m2!1sen!2sse!4v1613731794604!5m2!1sen!2sse" width="400" height="500" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+    
+</main>

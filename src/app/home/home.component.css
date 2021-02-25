@@ -1,0 +1,9 @@
+.cover-container {
+    max-width: 42em;
+  }
+  .btn-secondary,
+  .btn-secondary:hover,
+  .btn-secondary:focus {
+    color: #333;
+    text-shadow: none; 
+  }
