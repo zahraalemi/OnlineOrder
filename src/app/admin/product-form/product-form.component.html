@@ -1,0 +1,42 @@
+<main class="pl-3 mt-5 text-white">
+    <form #f="ngForm" >
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input ngModel name="title" #title="ngModel" id="title" type="text" class="form-control" required>
+            <div class="alert alert-danger" *ngIf="title.touched && !title.valid">Title is required</div>
+
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input ngModel name="price" #price="ngModel" id="price" type="number" class="form-control" required>
+            </div>
+            <div class="alert alert-danger" *ngIf="price.touched && !price.valid">Price is required</div>
+            
+        </div>
+
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select ngModel name="category" #category="ngModel" id="category" class="form-control" required>
+                <option value="">Choose a Category</option>
+                <option *ngFor="let c of categories$ | async" value={{c.name}}>>{{c.name}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="category.touched && !category.valid">Category is required</div>
+        </div>
+        <div class="form-group">
+            <label for="ingredients">Ingredients</label>
+            <input ngModel name="ingredients" #ingredients="ngModel" id="ingredients" type="text" class="form-control" required>
+            <div class="alert alert-danger" *ngIf="ingredients.touched && !ingredients.valid">Ingredients is required</div>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">ImageUrl</label>
+            <input ngModel name="imageUrl" #imageUrl="ngModel" id="imageUrl" type="text" class="form-control" required>
+            <div class="alert alert-danger" *ngIf="imageUrl.touched && !imageUrl.valid">ImageUrl is required</div>
+
+        </div>
+        
+        <div (click)="save(f.value)" class="btn btn-primary">Submit</div>
+    </form>
+</main>

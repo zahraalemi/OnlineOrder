@@ -18,6 +18,14 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FoodService } from './services/food.service';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { UserService } from './services/user.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './services/category.service';
+
 
 
 @NgModule({
@@ -29,7 +37,10 @@ import { LoginComponent } from './login/login.component';
     AboutComponent,
     ContactComponent,
     MenuComponent,
-    LoginComponent
+    LoginComponent,
+    CheckOutComponent,
+    MyOrdersComponent,
+    ProductFormComponent
     
   ],
   imports: [
@@ -42,7 +53,12 @@ import { LoginComponent } from './login/login.component';
     FormsModule
     
   ],
-  providers: [FoodService
+  providers: [
+    FoodService,
+    AuthService,
+    UserService,
+    AuthGuardService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

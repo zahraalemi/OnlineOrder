@@ -8,21 +8,19 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class FoodService {
 
-  constructor(private db: AngularFireDatabase, private fs:AngularFirestore) { }
+  constructor(private fs:AngularFirestore) { }
 
 
-  getAllFoods(amount:number):Observable<Food[]>{
-    return this.fs
-    .collection<Food>('Food',
-    ref => ref.limit(amount))
+  getAllFoods(){
+    return this.fs.collection<Food>('Food')
     .valueChanges();
     }
 
 
-  /* create(product) { 
-    return this.db.list('/Food').push(product);
+   create(product) { 
+    this.fs.collection("Food").doc().set(product);
   }
-
+/*
   getAll() {
     return this.db.list('/Food');
   }

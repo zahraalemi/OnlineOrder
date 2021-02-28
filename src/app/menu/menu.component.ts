@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit{
     foods$: Observable<Food[]>;
     constructor(private fs:FoodService){}
       ngOnInit(): void{
-        this.foods$ = this.fs.getAllFoods(4);
+        this.foods$ = this.fs.getAllFoods();
       }
     }
 
