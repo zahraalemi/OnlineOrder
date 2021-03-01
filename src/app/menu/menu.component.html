@@ -3,15 +3,15 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     <div class="col pb-4" *ngFor="let food of foods$ | async">
       <div class="card shadow-sm">
-        <img src="{{food.imageUrl}}" alt="">
+        <img src="{{food.imageUrl}}" alt="{{food.title}}" class="image-box">
         
         <div class="card-body box-carde">
           <span class="price-box shadow-sm">{{food.price | currency : "": true}}</span>
           <h5>{{food.title}}</h5>
-          <p class="card-text" style="height: 75px;">{{food.ingredients}}</p>
+          <p class="card-text">{{food.ingredients}}</p>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" (click)="addToCart()"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             </div>
             <small class="text-muted">{{food.category}}</small>
           </div>

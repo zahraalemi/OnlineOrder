@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Food } from '../shared/food';
 import { FoodService } from '../services/food.service';
 
 import { Observable } from 'rxjs';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 
 
@@ -14,34 +14,21 @@ import { Observable } from 'rxjs';
 })
 export class MenuComponent implements OnInit{
 
- /*  foods: Food[] = [];
-  filteredFood: Food[] = [];
-  category: string;
-
-  constructor(
-    route: ActivatedRoute,
-    foodService: FoodService
-  ) { */
-
     foods$: Observable<Food[]>;
-    constructor(private fs:FoodService){}
+
+    constructor(private fs:FoodService, private shopingcartService: ShoppingCartService){}
       ngOnInit(): void{
         this.foods$ = this.fs.getAllFoods();
       }
+
+      addToCart(food: Food){
+        let cartId = localStorage.getItem('cardtId');
+        if(!cartId){
+          this.shopingcartService.create();
+        }
+      }
+
     }
 
-    /* 
-     foodService
-      .getAll()
-      .switchMap(foods =>{
-        this.foods = foods;
-        return route.queryParamMap;
-      })
-      .subscribe(params => {
-        this.category = params.get('category');
-        
-        this.filteredFood = (this.category) ? 
-          this.foods.filter(p => p.category === this.category) : 
-          this.foods;
-      }); */
+    
  

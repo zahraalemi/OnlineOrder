@@ -9,6 +9,7 @@ import { CheckOutComponent } from '../check-out/check-out.component';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { MyOrdersComponent } from '../my-orders/my-orders.component';
 import { ProductFormComponent } from '../admin/product-form/product-form.component';
+import { ListFoodComponent } from '../admin/list-food/list-food.component';
 
 
 export const routes: Routes =[
@@ -18,7 +19,12 @@ export const routes: Routes =[
     {path: 'contact', component: ContactComponent},
     {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService]},
     {path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
+
+    
+    {path: 'admin/product-form/new', component: ProductFormComponent, canActivate: [AuthGuardService]},
+    {path: 'admin/product-form/:id', component: ProductFormComponent, canActivate: [AuthGuardService]},
     {path: 'admin/product-form', component: ProductFormComponent, canActivate: [AuthGuardService]},
+    {path: 'admin/list-food', component: ListFoodComponent, canActivate: [AuthGuardService]},
     {path: 'login', component: LoginComponent},
     {path: '', redirectTo: '/home', pathMatch: 'full'}
 ];

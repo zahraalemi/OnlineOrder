@@ -12,19 +12,43 @@
           <a class="nav-link" routerLink='/contact' routerLinkActive="active">Kontakt</a>
         </nav></div>
       </div>
-      <div class="d-flex nav nav-masthead pt-4">
+      <div class="d-flex nav nav-masthead pt-2">
 
         <ng-template #anonymousUser>
           <a class="nav-link" routerLink='/login' routerLinkActive="active">Login</a>
         </ng-template>
 
-        <span *ngIf="authService.user$ | async as user; else anonymousUser" class="d-flex">
+        <!-- <span *ngIf="authService.user$ | async as user; else anonymousUser" class="d-flex">
           <a class="nav-link" routerLinkActive="active">{{user.displayName}}</a>
           <a class="nav-link"  (click)="logout()" routerLinkActive="active">Logout</a>
-        </span>
+        </span> -->
+      
+        <nav class="navbar navbar-expand navbar-dark">
+            <div class="collapse navbar-collapse" *ngIf="authService.user$ | async as user; else anonymousUser" id="navbarNavDarkDropdown">
+              <ul class="navbar-nav">
+                <li ngbDropdown class="nav-item dropdown">
+                  <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{user.displayName}}
+                  </a>
+                  <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li ngbDropdownItem><a class="dropdown-item" routerLink='/my-order' routerLinkActive="active">My Order</a></li>
+                    <li ngbDropdownItem><a class="dropdown-item" routerLink='/admin/list-food' routerLinkActive="active">Manage Food</a></li>
+                    <li ngbDropdownItem><a class="dropdown-item" routerLink='/admin/manage-order' routerLinkActive="active">Manage Order</a></li>
+                    <li ngbDropdownItem><a class="dropdown-item"  (click)="logout()" routerLinkActive="active">Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+        </nav>
         
 
-        <a class="nav-link pl-3"  href="#"><i class="fas fa-shopping-bag"></i></a>
+
+        
+        <!-- _________ -->
+
+
+
+        <a class="nav-link pl-3 pt-3"  href="#"><i class="fas fa-shopping-bag"></i></a>
       </div>
     </div>
   </header>

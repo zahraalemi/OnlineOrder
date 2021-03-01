@@ -11,9 +11,12 @@
                         #mailAddress="ngModel" 
                         class="form-control" 
                         (input)="check(mailAddress, comment)"
-                        placeholder="Email address" 
+                        placeholder="your@email.com" email
                         >
-                    <div class="alert alert-danger" *ngIf="mailAddress.touched && !mailAddress.valid">Email is required</div>
+                    <div class="alert alert-danger" *ngIf="mailAddress.touched && !mailAddress.valid">
+                        <div *ngIf="mailAddress.errors.required">Email is required</div>
+                        <div *ngIf="mailAddress.errors.email">Enter a valid email address</div>
+                    </div>
                 </div>
                 
                 <div class="form-floating">

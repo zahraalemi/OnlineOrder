@@ -1,0 +1,15 @@
+.box-carde{
+    position: relative;
+}
+.price-box{
+    position: absolute;
+    background-color: #af3800;
+    color: white;
+    width: 80px;
+    height: 40px;
+    padding: 7px 0;
+    border-radius: 10px;
+    top: -20px;
+    right: 10px;
+    text-align: center;
+}
