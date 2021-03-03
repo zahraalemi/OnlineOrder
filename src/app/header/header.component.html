@@ -35,7 +35,7 @@
             </div>
         </nav> -->
         <a class="nav-link pl-3 pt-3" routerLink='/admin/list-food' routerLinkActive="active">Manage Food</a>
-        <a class="nav-link pl-3 pt-3 cart-number"  routerLink='/shopping-cart' routerLinkActive="active"><i class="fas fa-shopping-bag"></i><span class="cart-box" *ngIf="food$.length > 0">{{food$.length}}</span></a>
+        <a class="nav-link pl-3 pt-3 cart-number"  routerLink='/shopping-cart' routerLinkActive="active"><i class="fas fa-shopping-bag"></i><span class="cart-box" *ngIf="food$.length > 0">{{food$.length }}</span></a>
       </div>
     </div>
   </header>

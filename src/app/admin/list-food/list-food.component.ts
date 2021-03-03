@@ -32,6 +32,8 @@ export class ListFoodComponent implements OnInit {
     this.isActive =true;
     this.itemToEdit = food;
 
+    
+
   }
   updateItem(food: Food){
     this.foodservice.updateItem(food);

@@ -15,13 +15,13 @@ export class MenuComponent implements OnInit{
     
     foods$: Observable<Food[]>;
     cart = [];
+    cart2 = [];
     numberfood : any ={};
     x=1;
     newData : any = {};
     isActive: boolean =false;
-    cart2 = [];
-    quantity$ : any = {};
-    allFood = [];
+    itemToEdit: Food;
+    allFood$ = [];
     
     
 
@@ -30,69 +30,65 @@ export class MenuComponent implements OnInit{
     }
       ngOnInit(): void{
         this.foods$ = this.fs.getAllFoods();
-        this.quantity$ = this.allFood = JSON.parse(localStorage.getItem('foodList'));
+        if(localStorage.getItem('foodNo')){
+        this.allFood$ = JSON.parse(localStorage.getItem('foodNo'));
+        
+        }
+        
+        
+        
+      }
+      
+      
 
+      addToCart(event, food: Food){
+        this.isActive=true;
+        this.itemToEdit = food;
+        console.log(this.itemToEdit);
+
+        this.cart.push(food);
+        localStorage.setItem('foodList', JSON.stringify(this.cart));
+
+
+        this.numberfood = {
+          details : food,
+          no : 1
+        }
+        this.cart2.push(this.numberfood);
+        localStorage.setItem('foodNo', JSON.stringify(this.cart2));
+        
       }
 
-      addToCart(food: Food){
-        this.isActive=true;
-        if(localStorage.getItem('foodList') !== null){
-          this.allFood = JSON.parse(localStorage.getItem('foodList'));
-          for(let i=0; i< this.allFood.length; i++){
-            if (food.id !== this.allFood[i].details.id){
+
+      plusCartQt(food){
+        this.cart2= [];
+        this.cart2 = JSON.parse(localStorage.getItem('foodNo'));
+        console.log(this.cart2)
+        /* for(let i=0; i< this.allFood$.length; i++) */
+         for(let items of this.cart2){
+          
+          if (food.id == items.details.id){
+            
               console.log('if')
-              this.numberfood = {
-                details :food, 
-                quantity : this.x
-              }
               
-              this.cart.push(this.numberfood);
-              localStorage.setItem('foodList', JSON.stringify(this.cart));
-              }
-              else{
-                console.log('else')
-                console.log(this.allFood[i].quantity)
-              this.newData = {
-                details : this.allFood[i].details, 
-                quantity : this.allFood[i].quantity + 1,
-              }
-              console.log(this.newData);
-              localStorage.clear();
-              this.allFood.splice(i, 1);
-              console.log('ghabl az push');
-              console.log(this.allFood);
-              this.allFood.push(this.newData);
-              console.log('bad az push');
-              console.log(this.allFood);
-              localStorage.setItem('foodList', JSON.stringify(this.allFood));
+            this.newData = {
+              details : items.details, 
+              no : items.no + 1
             }
             
+            this.cart2.splice(items, 1);
+            this.cart2.push(this.newData);
+            localStorage.setItem('foodNo', JSON.stringify(this.cart2));
+            
           }
-          
-
         }
-        else{
-          console.log('null')
-          this.numberfood = {
-            details :food, 
-            quantity : this.x
-          }
-          
-          this.cart.push(this.numberfood);
-          localStorage.setItem('foodList', JSON.stringify(this.cart));
-        }
-
         
 
-        
+      
+    }
+    minusCartQt(){
 
-          
-          /* this.cart2.push(this.numberfood);
-          localStorage.setItem('foodnumber', JSON.stringify(this.cart2)); */
-
-        
-        
-      }
+    }
         
 
       
