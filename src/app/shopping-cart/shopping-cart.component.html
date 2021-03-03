@@ -1,0 +1,36 @@
+<main class="pl-3 mt-5 ">
+    <div class=" order-md-last">
+        <div class="d-flex justify-content-between align-items-center mb-3 text-white">
+            <h4>Your cart</h4>
+            <p *ngIf="food$.length > 0;else elseblock">You have <span class="badge bg-success bg-gradient rounded-pill">{{food$.length}}</span> items in your shopping cart.</p>
+            <ng-template #elseblock>
+                Your Basket is Empty
+            </ng-template>
+            
+        </div>
+        
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let f of food$">
+            <div class="title-box">
+              <h6 class="my-0">{{f.details.title}}</h6>
+              <small class="text-muted">{{f.details.ingredients}}</small>
+            </div>
+            <img src="{{f.details.imageUrl}}" class="image-box" alt="">
+            <div class="d-flex align-items-center">
+                <button class="btn"><i class="fas fa-plus-square"></i></button>
+                 {{f.quantity}}
+                <button class="btn"><i class="fas fa-minus-square"></i></button>
+            </div>
+            <span class="text-muted">{{f.details.price | currency : "": true}}</span>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>$20</strong>
+          </li>
+        </ul> 
+
+        <button class="btn btn-danger" (click)="clearStorage()">Remove all food</button>
+
+      </div>
+</main>

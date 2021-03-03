@@ -10,8 +10,14 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  
-  constructor(public authService: AuthService) { }
+  food$ =[];
+  constructor(public authService: AuthService) { 
+    if(localStorage.getItem('foodList')){
+      this.food$ = JSON.parse(localStorage.getItem('foodList'));
+      
+  }
+ 
+  }
 
   ngOnInit(): void {
   }
@@ -19,5 +25,7 @@ export class HeaderComponent {
   logout(){
     this.authService.logOutUser();
   }
+
+
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodService } from 'src/app/services/food.service';
+import { FoodService } from '../../services/food.service';
+import { Food } from '../../shared/food';
+import { CategoryService } from 'src/app/services/category.service';
 
 
 @Component({
@@ -9,23 +11,36 @@ import { FoodService } from 'src/app/services/food.service';
 })
 export class ListFoodComponent implements OnInit {
   foods$;
-  constructor(private foodservice: FoodService) { 
+  isActive:boolean = false;
+  itemToEdit: Food;
+  categories$ ;
+  
 
+  constructor(private foodservice: FoodService, private categoryService: CategoryService) { 
+    this.categories$ = this.categoryService.getCategories();
     this.foods$ = this.foodservice.getAllFoods();
   }
 
-  /* remove(id){
-    if(confirm('Are you sure you want to delete this product?')){
-      this.foodservice.delete(id);
+  ngOnInit(): void {
     }
-  } */
 
-  deleteItem(food){
-    console.log(food)
+  deleteItem(food: Food){
     this.foodservice.deleteItem(food);
   }
 
-  ngOnInit(): void {
+  editItem(event, food: Food){
+    this.isActive =true;
+    this.itemToEdit = food;
+
   }
+  updateItem(food: Food){
+    this.foodservice.updateItem(food);
+    this.clearState(); 
+  }
+  clearState(){
+    this.isActive =false;
+    this.itemToEdit = null;
+  }
+  
 
 }

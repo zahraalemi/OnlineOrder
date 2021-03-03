@@ -7,21 +7,15 @@
           <div class="pt-4">
         <nav class="nav nav-masthead">
           <a class="nav-link active" aria-current="page" routerLink='/home' routerLinkActive="active">Hem</a>
-          <a class="nav-link" routerLink='/about' routerLinkActive="active">Om Oss</a>
           <a class="nav-link" routerLink='/menu' routerLinkActive="active">meny</a>
           <a class="nav-link" routerLink='/contact' routerLinkActive="active">Kontakt</a>
         </nav></div>
       </div>
       <div class="d-flex nav nav-masthead pt-2">
 
-        <ng-template #anonymousUser>
+        <!-- <ng-template #anonymousUser>
           <a class="nav-link" routerLink='/login' routerLinkActive="active">Login</a>
         </ng-template>
-
-        <!-- <span *ngIf="authService.user$ | async as user; else anonymousUser" class="d-flex">
-          <a class="nav-link" routerLinkActive="active">{{user.displayName}}</a>
-          <a class="nav-link"  (click)="logout()" routerLinkActive="active">Logout</a>
-        </span> -->
       
         <nav class="navbar navbar-expand navbar-dark">
             <div class="collapse navbar-collapse" *ngIf="authService.user$ | async as user; else anonymousUser" id="navbarNavDarkDropdown">
@@ -39,16 +33,9 @@
                 </li>
               </ul>
             </div>
-        </nav>
-        
-
-
-        
-        <!-- _________ -->
-
-
-
-        <a class="nav-link pl-3 pt-3"  href="#"><i class="fas fa-shopping-bag"></i></a>
+        </nav> -->
+        <a class="nav-link pl-3 pt-3" routerLink='/admin/list-food' routerLinkActive="active">Manage Food</a>
+        <a class="nav-link pl-3 pt-3 cart-number"  routerLink='/shopping-cart' routerLinkActive="active"><i class="fas fa-shopping-bag"></i><span class="cart-box" *ngIf="food$.length > 0">{{food$.length}}</span></a>
       </div>
     </div>
   </header>

@@ -15,7 +15,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FoodService } from './services/food.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
-import { AuthGuardService } from './services/auth-guard.service';
 import { CategoryService } from './services/category.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 
@@ -28,10 +27,9 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MenuComponent } from './menu/menu.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ListFoodComponent } from './admin/list-food/list-food.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 
@@ -45,10 +43,9 @@ import { ListFoodComponent } from './admin/list-food/list-food.component';
     ContactComponent,
     MenuComponent,
     LoginComponent,
-    CheckOutComponent,
-    MyOrdersComponent,
     ProductFormComponent,
-    ListFoodComponent
+    ListFoodComponent,
+    ShoppingCartComponent
     
   ],
   imports: [
@@ -66,7 +63,6 @@ import { ListFoodComponent } from './admin/list-food/list-food.component';
     FoodService,
     AuthService,
     UserService,
-    AuthGuardService,
     CategoryService,
     ShoppingCartService
   ],

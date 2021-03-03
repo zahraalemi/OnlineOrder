@@ -23,3 +23,20 @@
     color: #fff;
     border-bottom-color: #fff;
   }
+
+  .cart-number{
+    position: relative;
+  }
+  .cart-box{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    left: 25px;
+    top: 15px;
+    opacity: .8;
+    padding: 0 4px;
+    font-size: .7rem;
+    color: #fff;
+  }

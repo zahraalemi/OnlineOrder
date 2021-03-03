@@ -40,7 +40,7 @@ export class FoodService {
     }
 
     updateItem(food: Food){
-      this.foodDoc = this.fs.doc(`items/${food.id}`);
+      this.foodDoc = this.fs.doc(`Food/${food.id}`);
       this.foodDoc.update(food);
     }
 
