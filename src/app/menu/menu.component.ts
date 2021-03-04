@@ -1,8 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { Food } from '../shared/food';
 import { FoodService } from '../services/food.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { IAlert } from '../shared/IAlert';
+import { Cart } from '../shared/cart';
+import { SharedService } from '../services/shared.service';
 
-import { Observable } from 'rxjs';
+
 
 
 
@@ -13,87 +17,94 @@ import { Observable } from 'rxjs';
 })
 export class MenuComponent implements OnInit{
     
-    foods$: Observable<Food[]>;
-    cart = [];
-    cart2 = [];
-    numberfood : any ={};
-    x=1;
-    newData : any = {};
+    foods$: Food[];
+    
     isActive: boolean =false;
     itemToEdit: Food;
-    allFood$ = [];
     
+   
+
+    public alerts: Array<IAlert> = [];
+    productAddedTocart:Food[];
+    cartItemCount: number = 0;
     
 
 
-    constructor(private fs:FoodService){
+    constructor(private fs:FoodService, private localstorageService: LocalStorageService, private sharedService: SharedService){
     }
       ngOnInit(): void{
-        this.foods$ = this.fs.getAllFoods();
-        if(localStorage.getItem('foodNo')){
-        this.allFood$ = JSON.parse(localStorage.getItem('foodNo'));
-        
-        }
-        
-        
-        
+        /* this.foods$ = this.fs.getAllFoods(); */
+        this.fs.getAllFoods().subscribe(items => {
+          this.foods$ = items; 
+        });
       }
       
       
 
-      addToCart(event, food: Food){
-        this.isActive=true;
-        this.itemToEdit = food;
-        console.log(this.itemToEdit);
-
-        this.cart.push(food);
-        localStorage.setItem('foodList', JSON.stringify(this.cart));
-
-
-        this.numberfood = {
-          details : food,
-          no : 1
-        }
-        this.cart2.push(this.numberfood);
-        localStorage.setItem('foodNo', JSON.stringify(this.cart2));
-        
-      }
-
-
-      plusCartQt(food){
-        this.cart2= [];
-        this.cart2 = JSON.parse(localStorage.getItem('foodNo'));
-        console.log(this.cart2)
-        /* for(let i=0; i< this.allFood$.length; i++) */
-         for(let items of this.cart2){
-          
-          if (food.id == items.details.id){
-            
-              console.log('if')
+      addToCart(food: Food){
+      
               
-            this.newData = {
-              details : items.details, 
-              no : items.no + 1
+              this.productAddedTocart=this.localstorageService.getProductFromCart();
+              if(this.productAddedTocart==null)
+              {
+                
+                console.log('this.productAddedTocart==null')
+                this.productAddedTocart=[];
+                this.productAddedTocart.push(food);
+                console.log(this.productAddedTocart)
+                this.localstorageService.addProductToCart(this.productAddedTocart);
+                this.alerts.push({
+                  id: 1,
+                  type: 'success',
+                  message: 'Product added to cart.'
+                });
+                setTimeout(()=>{   
+                  this.closeAlert(this.alerts);
+             }, 3000);
+
+              }
+              else
+              {
+                console.log('else this.productAddedTocart!==null')
+                let tempProduct=this.productAddedTocart.find(p=>p.id==food.id);
+                if(tempProduct==null)
+                {
+                  this.productAddedTocart.push(food);
+                  this.localstorageService.addProductToCart(this.productAddedTocart);
+                  this.alerts.push({
+                    id: 1,
+                    type: 'success',
+                    message: 'Product added to cart.'
+                  });
+                  //setTimeout(function(){ }, 2000);
+                  setTimeout(()=>{   
+                    this.closeAlert(this.alerts);
+               }, 3000);
+                }
+                else
+                {
+                  this.alerts.push({
+                    id: 2,
+                    type: 'warning',
+                    message: 'Product already exist in cart.'
+                  });
+                  setTimeout(()=>{   
+                    this.closeAlert(this.alerts);
+               }, 3000);
+                }
+                
+              }
+              //console.log(this.cartItemCount);
+              this.cartItemCount=this.productAddedTocart.length;
+              // this.cartEvent.emit(this.cartItemCount);
+              this.sharedService.updateCartCount(this.cartItemCount);
+              console.log(this.sharedService);
             }
-            
-            this.cart2.splice(items, 1);
-            this.cart2.push(this.newData);
-            localStorage.setItem('foodNo', JSON.stringify(this.cart2));
-            
-          }
-        }
-        
-
       
-    }
-    minusCartQt(){
-
-    }
-        
-
-      
-
-    
+      public closeAlert(alert:any) {
+          const index: number = this.alerts.indexOf(alert);
+          this.alerts.splice(index, 1);
+      }   
 
   }
  

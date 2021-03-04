@@ -16,7 +16,7 @@ import { FoodService } from './services/food.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { CategoryService } from './services/category.service';
-import { ShoppingCartService } from './services/shopping-cart.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 
 
@@ -65,7 +65,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     AuthService,
     UserService,
     CategoryService,
-    ShoppingCartService,
+    LocalStorageService
     
   ],
   bootstrap: [AppComponent]

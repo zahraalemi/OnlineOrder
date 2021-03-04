@@ -42,6 +42,7 @@
                         <div *ngIf="imageUrl.errors.required">ImageUrl is required</div>
                         <div *ngIf="imageUrl.errors.url">Please enter a valid URL</div>
                     </div>
+                    <input class="qt-box" [(ngModel)]="Qt" name="Quantity" #Quantity="ngModel" [value]="0">
         
                 </div>
                 

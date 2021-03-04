@@ -10,7 +10,7 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./list-food.component.css']
 })
 export class ListFoodComponent implements OnInit {
-  foods$;
+  foods$ : Food[];
   isActive:boolean = false;
   itemToEdit: Food;
   categories$ ;
@@ -18,7 +18,11 @@ export class ListFoodComponent implements OnInit {
 
   constructor(private foodservice: FoodService, private categoryService: CategoryService) { 
     this.categories$ = this.categoryService.getCategories();
-    this.foods$ = this.foodservice.getAllFoods();
+    /* this.foods$ = this.foodservice.getAllFoods(); */
+    this.foodservice.getAllFoods().subscribe(items => {
+      this.foods$ = items; 
+    });
+    
   }
 
   ngOnInit(): void {

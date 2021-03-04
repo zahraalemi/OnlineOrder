@@ -28,13 +28,15 @@ export class FoodService {
 
     getAllFoods(){
       return this.foods;
+      /* return this.fs.collection<Food>('Food')
+    .valueChanges(); */
     }
   
 
   
 
     deleteItem(food: Food){
-      console.log(food.id);
+      
       this.foodDoc = this.fs.doc(`Food/${food.id}`);
       this.foodDoc.delete();
     }

@@ -2,7 +2,7 @@
     <div class=" order-md-last">
         <div class="d-flex justify-content-between align-items-center mb-3 text-white">
             <h4>Your cart</h4>
-            <p *ngIf="food$.length > 0;else elseblock">You have <span class="badge bg-success bg-gradient rounded-pill">{{food$.length}}</span> items in your shopping cart.</p>
+            <p *ngIf="isActive;else elseblock">You have <span class="badge bg-success bg-gradient rounded-pill">{{productAddedTocart.length}}</span> items in your shopping cart.</p>
             <ng-template #elseblock>
                 Your Basket is Empty
             </ng-template>
@@ -10,23 +10,38 @@
         </div>
         
         <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let f of food$">
-            <div class="title-box">
-              <h6 class="my-0">{{f.details.title}}</h6>
-              <small class="text-muted">{{f.details.ingredients}}</small>
+          <li class="list-group-item justify-content-start d-flex lh-sm" >
+            
+            <div class="title-box col-6">
+              <h6 class="my-0"><strong>Name</strong></h6>
+              <small class="text-muted">Ingredients</small>
             </div>
-            <img src="{{f.details.imageUrl}}" class="image-box" alt="">
-            <div class="d-flex align-items-center">
-                <button class="btn"><i class="fas fa-plus-square"></i></button>
-                 {{f.quantity}}
-                <button class="btn"><i class="fas fa-minus-square"></i></button>
+            <div class="d-flex align-items-center col-2"><h6><strong>Image</strong></h6></div>
+            
+            
+            <div class="d-flex align-items-center col-3">
+              <h6><strong>Quantity</strong></h6>
             </div>
-            <span class="text-muted">{{f.details.price | currency : "": true}}</span>
+            <h6 class="d-flex align-items-center"><strong>Price</strong></h6>
+          </li>
+
+          <li class="list-group-item d-flex lh-sm" *ngFor="let prod of productAddedTocart;let q = index">
+            <div class=" col-6">
+              <h6 class="my-0">{{prod.title}}</h6>
+              <small class="text-muted">{{prod.ingredients}}</small>
+            </div>
+            <img src="{{prod.imageUrl}}" class="col-2" alt="">
+            <div class="d-flex align-items-center  col-3">
+              <button type="button" (click)="onAddQuantity(prod)" class="btn btn-success">+</button> 
+              <input type="text"  [ngModel] ="prod.Quantity" (ngModelChange) ="prod.Quantity=$event" class="form-control form-inline">
+              <button type="button" (click)="onRemoveQuantity(prod)" class="btn btn-danger">-</button>
+            </div>
+            <span class="text-muted d-flex align-items-center col-2">{{prod.price * prod.Quantity | currency : "": true}}</span>
           </li>
 
           <li class="list-group-item d-flex justify-content-between">
             <span>Total (USD)</span>
-            <strong>$20</strong>
+            <strong>{{allTotal | currency : "": true}}</strong>
           </li>
         </ul> 
 

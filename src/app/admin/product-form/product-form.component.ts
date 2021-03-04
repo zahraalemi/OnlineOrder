@@ -14,25 +14,29 @@ export class ProductFormComponent implements OnInit {
   isActive = true;
   food :any = {};
   id;
+  Qt: number = 1;
 
   constructor(
     private router: Router,
     private route:ActivatedRoute,
     private categoryService: CategoryService, 
     private foodService: FoodService) { 
+    
     this.categories$ = this.categoryService.getCategories();
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id) this.foodService.get(this.id).valueChanges(f =>this.food = f);
     
   }
   save(food){
-    console.log(this.id + 'id')
-    if(this.id) this.foodService.update(this.id,food);
+    /* console.log(this.id + 'id')
+    if(this.id) this.foodService.update(this.id,food); */
     this.foodService.create(food);
     this.router.navigate(['/admin/list-food']);
   }
 
   ngOnInit(): void {
+
+    
   }
 
 }
