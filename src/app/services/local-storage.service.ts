@@ -11,7 +11,7 @@ export class LocalStorageService {
 
 
 
-addProductToCart(prodcuts: any) {
+  addProductToCart(prodcuts: any) {
     localStorage.setItem("product", JSON.stringify(prodcuts));
   }
   getProductFromCart() {

@@ -9,7 +9,6 @@ import { IAlert } from '../shared/IAlert';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-/*   food$=[]; */
 dafualtQuantity:number=1;
   productAddedTocart:Food[];
   allTotal:number;
@@ -20,18 +19,11 @@ dafualtQuantity:number=1;
   public alerts: Array<IAlert> = [];
 
   constructor(private localstorageService: LocalStorageService) { 
-    /* if(localStorage.getItem('foodList')){
-      this.food$ = JSON.parse(localStorage.getItem('foodList'));
-      console.log(this.food$) 
-  }*/
-
+    
   }
 
   ngOnInit(): void {
     this.productAddedTocart=this.localstorageService.getProductFromCart();
-    /* for (let i in this.productAddedTocart) {
-      this.productAddedTocart[i].Quantity=1;
-   } */
    this.localstorageService.removeAllProductFromCart();
    this.localstorageService.addProductToCart(this.productAddedTocart);
    this.calculteAllTotal(this.productAddedTocart);
@@ -49,13 +41,11 @@ dafualtQuantity:number=1;
   }
   onAddQuantity(food:Food)
   {
-    //Get Product
     this.productAddedTocart=this.localstorageService.getProductFromCart();
     this.productAddedTocart.find(p=>p.id==food.id).Quantity = food.Quantity+1;
-    
-  this.localstorageService.removeAllProductFromCart();
-  this.localstorageService.addProductToCart(this.productAddedTocart);
-  this.calculteAllTotal(this.productAddedTocart);
+    this.localstorageService.removeAllProductFromCart();
+    this.localstorageService.addProductToCart(this.productAddedTocart);
+    this.calculteAllTotal(this.productAddedTocart);
    
   }
   onRemoveQuantity(food:Food)

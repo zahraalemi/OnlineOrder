@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProductFormComponent implements OnInit {
   categories$ ;
-  isActive = true;
+  /* isActive = true; */
   food :any = {};
   id;
   Qt: number = 1;
@@ -27,16 +27,15 @@ export class ProductFormComponent implements OnInit {
     if(this.id) this.foodService.get(this.id).valueChanges(f =>this.food = f);
     
   }
-  save(food){
-    /* console.log(this.id + 'id')
-    if(this.id) this.foodService.update(this.id,food); */
-    this.foodService.create(food);
-    this.router.navigate(['/admin/list-food']);
-  }
-
   ngOnInit(): void {
 
     
   }
+  save(food){
+    this.foodService.create(food);
+    this.router.navigate(['/admin/list-food']);
+  }
+
+  
 
 }

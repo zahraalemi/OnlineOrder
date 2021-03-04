@@ -7,10 +7,10 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
-  isActive = true;
+  
   formGroup: FormGroup;
   textSuccess='';
-  
+  isActive = true;
 
   check(mail, comment){
     mail.valid && comment.valid ? this.isActive = false : this.isActive =true;

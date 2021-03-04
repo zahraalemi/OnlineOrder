@@ -18,7 +18,6 @@ export class ListFoodComponent implements OnInit {
 
   constructor(private foodservice: FoodService, private categoryService: CategoryService) { 
     this.categories$ = this.categoryService.getCategories();
-    /* this.foods$ = this.foodservice.getAllFoods(); */
     this.foodservice.getAllFoods().subscribe(items => {
       this.foods$ = items; 
     });

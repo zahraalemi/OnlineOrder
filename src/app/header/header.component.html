@@ -2,7 +2,8 @@
     <div class="d-flex justify-content-between">
       <div class="d-flex">
         <div class="mr-5">
-          <img class="logo" src="./../assets/logo.png" alt="food.com">
+          <a routerLink='/home' >
+          <img class="logo" src="./../assets/logo.png" alt="food.com"></a>
         </div>
           <div class="pt-4">
         <nav class="nav nav-masthead">
@@ -12,28 +13,6 @@
         </nav></div>
       </div>
       <div class="d-flex nav nav-masthead pt-2">
-
-        <!-- <ng-template #anonymousUser>
-          <a class="nav-link" routerLink='/login' routerLinkActive="active">Login</a>
-        </ng-template>
-      
-        <nav class="navbar navbar-expand navbar-dark">
-            <div class="collapse navbar-collapse" *ngIf="authService.user$ | async as user; else anonymousUser" id="navbarNavDarkDropdown">
-              <ul class="navbar-nav">
-                <li ngbDropdown class="nav-item dropdown">
-                  <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{user.displayName}}
-                  </a>
-                  <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                    <li ngbDropdownItem><a class="dropdown-item" routerLink='/my-order' routerLinkActive="active">My Order</a></li>
-                    <li ngbDropdownItem><a class="dropdown-item" routerLink='/admin/list-food' routerLinkActive="active">Manage Food</a></li>
-                    <li ngbDropdownItem><a class="dropdown-item" routerLink='/admin/manage-order' routerLinkActive="active">Manage Order</a></li>
-                    <li ngbDropdownItem><a class="dropdown-item"  (click)="logout()" routerLinkActive="active">Logout</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-        </nav> -->
         <a class="nav-link pl-3 pt-3" routerLink='/admin/list-food' routerLinkActive="active">Manage Food</a>
         <a class="nav-link pl-3 pt-3 cart-number"  routerLink='/shopping-cart' routerLinkActive="active"><i class="fas fa-shopping-bag"></i><span class="cart-box" *ngIf="cartItemCount > 0">{{cartItemCount}}</span></a>
       </div>

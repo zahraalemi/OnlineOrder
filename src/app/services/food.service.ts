@@ -28,8 +28,6 @@ export class FoodService {
 
     getAllFoods(){
       return this.foods;
-      /* return this.fs.collection<Food>('Food')
-    .valueChanges(); */
     }
   
 
@@ -47,22 +45,16 @@ export class FoodService {
     }
 
    create(food: Food) { 
-    /* this.fs.collection("Food").doc().set(product); */
     this.foodsCollection.add(food);
-
   }
 
-  /* getAllFoods(){
-    return this.fs.collection<Food>('Food')
-    .valueChanges();
-    } */
+  
   
   get(id) { 
     return this.fs.collection("Food").doc(id);
   }
 
   update(id, food) { 
-    /* return this.fs.collection('/Food/' + id).snapshotChanges(food); */
     this.foodDoc = this.fs.doc(`Food/${food.id}`);
       this.foodDoc.update(food);
   }
@@ -71,36 +63,4 @@ export class FoodService {
     return this.fs.collection("Food").doc(id).delete();
   }
  
-
-
- /*  getAll(): AngularFirestoreCollection<Tutorial> {
-    return this.tutorialsRef;
-  }
-
-  create(tutorial: Tutorial): any {
-    return this.tutorialsRef.add({ ...tutorial });
-  }
-
-  update(id: string, data: any): Promise<void> {
-    return this.tutorialsRef.doc(id).update(data);
-  }
-
-  delete(id: string): Promise<void> {
-    return this.tutorialsRef.doc(id).delete();
-  } */
-
-
-/*   getAll() {
-    this.fs.collection("Food").doc();
-  }
- 
-  
-
-  update(productId, product) { 
-    return this.db.object('/Food/' + productId).update(product);
-  }
-
-  delete(productId) { 
-    return this.db.object('/Food/' + productId).remove();
-  } */
 }
