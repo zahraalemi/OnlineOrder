@@ -2,8 +2,8 @@
     <div class=" order-md-last">
         <div class="d-flex justify-content-between align-items-center mb-3 text-white">
             <h4>Your cart</h4>
-            <p *ngIf="isActive;else elseblock">You have <span class="badge bg-success bg-gradient rounded-pill">{{productAddedTocart.length}}</span> items in your shopping cart.</p>
-            <ng-template #elseblock>
+            <p *ngIf="isActive;else emptyblock">You have <span class="badge bg-success bg-gradient rounded-pill">{{productAddedTocart.length}}</span> items in your shopping cart.</p>
+            <ng-template #emptyblock>
                 Your Basket is Empty
             </ng-template>
             
@@ -31,10 +31,16 @@
               <small class="text-muted">{{prod.ingredients}}</small>
             </div>
             <img src="{{prod.imageUrl}}" class="col-2" alt="">
-            <div class="d-flex align-items-center  col-3">
+            <div class="col-3 d-flex flex-column justify-content-center">
+              <div class="d-flex align-items-center pb-2">
               <button type="button" (click)="onAddQuantity(prod)" class="btn btn-success">+</button> 
               <input type="text"  [ngModel] ="prod.Quantity" (ngModelChange) ="prod.Quantity=$event" class="form-control form-inline">
-              <button type="button" (click)="onRemoveQuantity(prod)" class="btn btn-danger">-</button>
+              <button type="button" (click)="onRemoveQuantity(prod)" class="btn btn-danger" *ngIf="prod.Quantity >1; else deleteblock">-</button>
+              <ng-template #deleteblock>
+                <button type="button" class="btn btn-danger" disabled>-</button>
+              </ng-template>
+            </div>
+              
             </div>
             <span class="text-muted d-flex align-items-center col-2">{{prod.price * prod.Quantity | currency : "": true}}</span>
           </li>

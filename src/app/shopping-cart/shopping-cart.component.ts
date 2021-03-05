@@ -13,6 +13,7 @@ dafualtQuantity:number=1;
   productAddedTocart:Food[];
   allTotal:number;
   isActive:boolean = false;
+  qtNumber:boolean = false;
 
 
   public globalResponse: any;
@@ -32,7 +33,7 @@ dafualtQuantity:number=1;
      this.isActive =true;
 
    }
-
+   
   }
 
   clearStorage(){
@@ -55,7 +56,9 @@ dafualtQuantity:number=1;
     this.localstorageService.removeAllProductFromCart();
     this.localstorageService.addProductToCart(this.productAddedTocart);
     this.calculteAllTotal(this.productAddedTocart);
+    
   }
+  
   calculteAllTotal(allItems:Food[])
   {
     let total=0;
@@ -64,5 +67,7 @@ dafualtQuantity:number=1;
    }
    this.allTotal=total;
   }
+
+
 
 }
